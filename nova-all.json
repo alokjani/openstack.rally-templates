@@ -1,0 +1,256 @@
+{
+    "NovaServers.boot_server_from_volume_and_delete": [
+        {
+            "args": {
+                "flavor": {
+                    "name": "m1.medium"
+                },
+                "image": {
+                    "name": "Ubuntu14.04"
+                },
+                "volume_size": 10,
+                "force_delete": false
+            },
+            "runner": {
+                "type": "constant",
+                "times": 10,
+                "concurrency": 2
+            },
+            "context": {
+                "users": {
+                    "tenants": 1,
+                    "users_per_tenant": 2
+                }
+            }
+        }
+    ],
+
+   "NovaServers.boot_and_rebuild_server": [
+        {
+            "args": {
+                "flavor": {
+                    "name": "m1.medium"
+                },
+                "from_image": {
+                    "name": "Ubuntu14.04"
+                },
+                "to_image": {
+                    "name": "Ubuntu14.04"
+                }
+            },
+            "runner": {
+                "type": "constant",
+                "times": 5,
+                "concurrency": 2
+            },
+            "context": {
+                "users": {
+                    "tenants": 1,
+                    "users_per_tenant": 1
+                }
+            }
+        }
+    ],
+
+    "NovaHypervisors.list_hypervisors": [
+     {
+       "runner": {
+         "type": "constant",
+         "concurrency": 2,
+         "times": 10
+       },
+       "args": {
+         "detailed": true
+       }
+     }
+   ],
+
+   "NovaServers.list_servers": [
+        {
+            "args": {
+                "detailed": true
+            },
+            "runner": {
+                "type": "constant",
+                "times": 1,
+                "concurrency": 1
+            },
+            "context": {
+                "users": {
+                    "tenants": 1,
+                    "users_per_tenant": 1
+                },
+                "servers": {
+                    "flavor": {
+                        "name": "m1.medium"
+                    },
+                    "image": {
+                        "name": "Ubuntu14.04"
+                    },
+                    "servers_per_tenant": 2
+                }
+            }
+        }
+    ],
+
+    "NovaServers.boot_server": [
+        {
+            "args": {
+                "flavor": {
+                    "name": "m1.medium"
+                },
+                "image": {
+                    "name": "Ubuntu14.04"
+                }
+            },
+            "runner": {
+                "type": "constant",
+                "times": 10,
+                "concurrency": 2
+            },
+            "context": {
+                "users": {
+                    "tenants": 1,
+                    "users_per_tenant": 2
+                }
+            }
+        }
+    ],
+
+   "NovaServers.boot_and_associate_floating_ip": [
+    {
+      "runner": {
+        "type": "constant",
+        "concurrency": 1,
+        "times": 1
+      },
+      "args": {
+        "flavor": {
+          "name": "m1.medium"
+        },
+        "image": {
+          "name": "Ubuntu14.04"
+        }
+      },
+      "context": {
+        "users": {
+          "users_per_tenant": 1,
+          "tenants": 1
+        },
+        "network": {}
+      }
+    }
+  ],
+
+    "NovaServers.boot_and_delete_server": [
+        {
+            "args": {
+                "flavor": {
+                    "name": "m1.medium"
+                },
+                "image": {
+                    "name": "Ubuntu14.04"
+                },
+                "force_delete": false
+            },
+            "runner": {
+                "type": "constant",
+                "times": 10,
+                "concurrency": 2
+            },
+            "context": {
+                "users": {
+                    "tenants": 3,
+                    "users_per_tenant": 2
+                }
+            }
+        }
+    ],
+
+    "NovaServers.boot_and_list_server": [
+        {
+            "args": {
+                "flavor": {
+                    "name": "m1.medium"
+                },
+                "image": {
+                    "name": "Ubuntu14.04"
+                },
+                "detailed": true
+            },
+            "runner": {
+                "type": "constant",
+                "times": 1,
+                "concurrency": 1
+            },
+            "context": {
+                "users": {
+                    "tenants": 1,
+                    "users_per_tenant": 1
+                }
+            }
+        }
+    ],
+
+
+   "NovaServers.boot_and_live_migrate_server": [
+        {
+            "args": {
+                "flavor": {
+                    "name": "m1.medium"
+                },
+                "image": {
+                    "name": "Ubuntu14.04"
+                },
+                "block_migration": true
+            },
+            "runner": {
+                "type": "constant",
+                "times": 5,
+                "concurrency": 2
+            },
+            "context": {
+                "users": {
+                    "tenants": 1,
+                    "users_per_tenant": 1
+                }
+            }
+        }
+    ],
+
+  "NovaServers.boot_and_associate_floating_ip": [
+    {
+      "runner": {
+        "type": "constant",
+        "concurrency": 2,
+        "times": 5
+      },
+      "args": {
+        "flavor": {
+          "name": "m1.medium"
+        },
+        "image": {
+          "name": "Ubuntu14.04"
+        },
+        "nics": [{"net-id": "08f6f5cf-1fe5-48df-a953-eea2f163ca8b"}],
+        "floating_network": "ext_net04",
+        "use_floatingip": true
+      },
+      "context": {
+        "users": {
+          "users_per_tenant": 1,
+          "tenants": 1
+        },
+        "network": {
+        },
+         "roles":
+                ["admin"]
+
+      }
+    }
+  ]
+
+
+
+}
+

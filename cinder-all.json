@@ -1,0 +1,164 @@
+{
+    "CinderVolumes.create_volume": [
+        {
+            "args": {
+                "size": 10
+            },
+            "runner": {
+                "type": "constant",
+                "times": 3,
+                "concurrency": 2
+            },
+            "context": {
+                "users": {
+                    "tenants": 1,
+                    "users_per_tenant": 1
+                }
+            }
+        }
+    ],
+
+    "CinderVolumes.create_and_delete_volume": [
+        {
+            "args": {
+                "size": 10,
+                "image": {
+                    "name": "Ubuntu14.04"
+                }
+            },
+            "runner": {
+                "type": "constant",
+                "times": 5,
+                "concurrency": 2
+            },
+            "context": {
+                "users": {
+                    "tenants": 1,
+                    "users_per_tenant": 1
+                }
+            }
+        }
+    ],
+
+    "CinderVolumes.create_and_list_volume": [
+        {
+            "args": {
+                "size": 1,
+                "detailed": true
+            },
+            "runner": {
+                "type": "constant",
+                "times": 3,
+                "concurrency": 1
+            },
+            "context": {
+                "users": {
+                    "tenants": 1,
+                    "users_per_tenant": 1
+                }
+            }
+        },
+        {
+            "args": {
+                "size": {
+                    "min": 1,
+                    "max": 5
+                },
+                "detailed": true
+            },
+            "runner": {
+                "type": "constant",
+                "times": 3,
+                "concurrency": 1
+            },
+            "context": {
+                "users": {
+                    "tenants": 1,
+                    "users_per_tenant": 1
+                }
+            }
+        }
+    ],
+
+    "CinderVolumes.create_snapshot_and_attach_volume": [
+        {
+            "args": {
+                "volume_type": false,
+                "size": 10        
+            },
+
+            "runner": {
+                "type": "constant",
+                "times": 4,
+                "concurrency": 2
+            },
+
+            "context": {
+                "users": {
+                    "tenants": 2,
+                    "users_per_tenant": 1
+                },
+                "servers": {
+                    "image": {
+                        "name": "Ubuntu14.04"
+                    },
+                    "flavor": {
+                        "name": "m1.medium"
+                    },
+                    "servers_per_tenant": 2
+                }
+            }
+        }
+        
+    ],
+
+
+    "CinderVolumes.create_and_upload_volume_to_image": [
+        {
+            "args": {
+                "size": 1,
+                "force": false,
+                "container_format": "bare",
+                "disk_format": "raw",
+                "do_delete": true
+            },
+            "runner": {
+                "type": "constant",
+                "times": 3,
+                "concurrency": 2
+            },
+            "context": {
+                "users": {
+                    "tenants": 2,
+                    "users_per_tenant": 2
+                }
+            }
+        },
+        {
+            "args": {
+                "size": {
+                    "min": 1,
+                    "max": 5
+                },
+                "force": false,
+                "container_format": "bare",
+                "disk_format": "raw",
+                "do_delete": true
+            },
+            "runner": {
+                "type": "constant",
+                "times": 3,
+                "concurrency": 2
+            },
+            "context": {
+                "users": {
+                    "tenants": 2,
+                    "users_per_tenant": 2
+                }
+            }
+        }
+    ]
+
+
+
+}
